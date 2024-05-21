@@ -1,4 +1,4 @@
-[DEMO]
+# [DEMO]
 # Ollama: Streamlit Language Model Selector
 
 Welcome to Ollama, a Streamlit-based application that allows you to interact with various language models. This app provides a user-friendly interface to select a model, input text, and receive generated responses.
