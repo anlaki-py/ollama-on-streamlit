@@ -19,24 +19,16 @@ with st.container():
 
 st.write("---")
 st.write("Language Model Selection and Input Handler")
-
-# add your own models here
-models = ['tinyllama', 
-          'phi3', 
-          'codegemma:2b', 
-          'gemma:2b', 
-          'qwen:0.5b', 
-          'deepseek-coder:latest'
-          ]
-
+models = ['tinyllama', 'phi3', 'codegemma:2b', 'gemma:2b', 'qwen:0.5b', 'deepseek-coder:latest']
 selected_model = st.selectbox('Choose a model:', models)
 llm = Ollama(model=selected_model)
 
 st.write("---")
-user_input = st.text_area("Enter your input here", height=150)
+user_input = st.text_area("Enter your input here", height=150)  # Making the input box expandable
 if st.button("Submit"):
     try:
         result = llm.invoke(user_input)
+        # Display the result in real time (Streamlit inherently updates in real-time)
         st.write("---")
         st.write("## Output:")
         st.write(result)
@@ -48,8 +40,8 @@ if st.button("Submit"):
             counter += 1
             filename = f"outputs/output{counter}.md"  # Incrementing the file name if exists
         with open(filename, "w") as file:
-            file.write(result)
-        st.success(f"output saved in {filename}")
+            file.write(f"# Model: {selected_model}\n---\n## Input\n\n{user_input}\n\n## Output\n\n{result}")
+        st.success(f"Answer saved in {filename}")
     except Exception as e:
         st.error(f"An error occurred: {e}")
 
