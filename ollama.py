@@ -2,8 +2,6 @@ import streamlit as st
 from langchain_community.llms import Ollama
 import os
 import datetime
-
-# Get the current datetime
 from datetime import datetime
 
 # Get the current date and time
