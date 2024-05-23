@@ -27,6 +27,7 @@ with st.container():
 
 st.write("---")
 st.write("Language Model Selection and Input Handler")
+# change and add your installed models.
 models = ['tinyllama', 'phi3', 'codegemma:2b', 'gemma:2b', 'qwen:0.5b', 'deepseek-coder:latest']
 selected_model = st.selectbox('Choose a model:', models)
 llm = Ollama(model=selected_model)
@@ -36,13 +37,12 @@ user_input = st.text_area("Enter your input here", height=150)  # Making the inp
 if st.button("Submit"):
     try:
         result = llm.invoke(user_input)
-        # Display the result in real time (Streamlit inherently updates in real-time)
         st.write("---")
         st.write("## Output:")
         st.write(result)
         st.write("---")
-        # Save the answer in markdown format
-        filename = "outputs/output.md"
+        # Save the output in markdown format
+        filename = "outputs/{formatted_date_time}_{selected_model}_output.md"
         counter = 1
         while os.path.isfile(filename):  # Checking if file exists
             counter += 1
