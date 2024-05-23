@@ -1,6 +1,16 @@
 import streamlit as st
 from langchain_community.llms import Ollama
 import os
+import datetime
+
+# Get the current datetime
+from datetime import datetime
+
+# Get the current date and time
+now = datetime.now()
+
+# Format the date and time
+formatted_date_time = now.strftime("%Y-%m-%d-%I:%M:%S-%p")
 
 # Set Streamlit page config
 st.set_page_config(page_title="Ollama", page_icon=":llama:")
@@ -38,12 +48,14 @@ if st.button("Submit"):
         counter = 1
         while os.path.isfile(filename):  # Checking if file exists
             counter += 1
-            filename = f"outputs/output{counter}.md"  # Incrementing the file name if exists
+            filename = f"outputs/{formatted_date_time}_{selected_model}_output_{counter}.md"  # Incrementing the file name if exists
         with open(filename, "w") as file:
             file.write(f"# Model: {selected_model}\n---\n## Input\n\n{user_input}\n\n## Output\n\n{result}")
-        st.success(f"Answer saved in {filename}")
+        st.success(f"Output saved in {filename}")
     except Exception as e:
         st.error(f"An error occurred: {e}")
 
 st.write("---")
 st.write("Everything Ai says is made up!")
+st.write("---")
+st.write("anlaki©")
